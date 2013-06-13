@@ -1,0 +1,30 @@
+--- #YAML:1.0
+name:               NNexus
+version:            2.0alpha
+abstract:           NNexus autolinker
+author:
+    - Deyan Ginev <d.ginev@jacobs-university.de>
+license:            unknown
+distribution_type:  module
+configure_requires:
+    ExtUtils::MakeMaker:  0
+build_requires:
+    ExtUtils::MakeMaker:  0
+requires:
+    DBD::SQLite:        0
+    DBI:                0
+    HTML::Parser:       0
+    List::MoreUtils:    0
+    Mojo::DOM:          0
+    Mojo::JSON:         0
+    Mojolicious:        3.9
+    Mojolicious::Lite:  0
+    Text::Unidecode:    0
+no_index:
+    directory:
+        - t
+        - inc
+generated_by:       ExtUtils::MakeMaker version 6.57_05
+meta-spec:
+    url:      http://module-build.sourceforge.net/META-spec-v1.4.html
+    version:  1.4
