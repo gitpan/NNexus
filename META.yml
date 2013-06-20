@@ -1,6 +1,6 @@
 --- #YAML:1.0
 name:               NNexus
-version:            2.0alpha
+version:            2.0alpha2
 abstract:           NNexus autolinker
 author:
     - Deyan Ginev <d.ginev@jacobs-university.de>
