@@ -21,7 +21,7 @@ WriteMakefile(
   ABSTRACT => "NNexus autolinker",
   VERSION_FROM => 'lib/NNexus.pm',
   PREREQ_PM => { 
-    'Mojolicious'=>3.9,
+    'Mojolicious'=>4.6,
     'Mojolicious::Lite'=>0,
     'Mojo::JSON'=>0,
     'Mojo::DOM'=>0,
@@ -51,9 +51,9 @@ sub MY::postamble {
 
 
 sub compile_snapshot_db {
-  push(@EXCLUSIONS,'blib/lib/NNexus/resources/database/snapshot-5-2013.sqlite');
+  push(@EXCLUSIONS,'blib/lib/NNexus/resources/database/snapshot-1-2014.sqlite');
   $$MORE_MACROS{SNAPSHOT_FILE} = '$(INST_LIBDIR)/NNexus/resources/database/snapshot.db';
-  $$MORE_MACROS{DUMP_FILE} = 'lib/NNexus/resources/database/snapshot-5-2013.sqlite';
+  $$MORE_MACROS{DUMP_FILE} = 'lib/NNexus/resources/database/snapshot-1-2014.sqlite';
   $$MORE_MACROS{DBH} = '$$dbh';
   $$MORE_MACROS{IT} = '$$_';
   $$MORE_MACROS{SQLITE} = 'sqlite3';
@@ -63,7 +63,7 @@ pure_all :: $(SNAPSHOT_FILE)
 
 # Always set version if version module template is newer
 $(SNAPSHOT_FILE): $(DUMP_FILE)
-	$(PERLRUN) -e "unlink shift" $(SNAPSHOT_FILE)
+	$(PERLRUN) -e '$$file = shift; unlink $$file; $$now = time; utime $$now, $$now, $$file;' $(SNAPSHOT_FILE)
 	$(PERLRUN) -MDBI -e 'my $(DBH) = DBI->connect( "dbi:SQLite:".shift ); open(IN,"<",shift); for (split(/;\n(?!END)/,join("",<IN>))) {$(DBH)->do($(IT));} close IN; $(DBH)->disconnect;' $(SNAPSHOT_FILE) $(DUMP_FILE)
 
 CompileSnapshot

@@ -1,6 +1,8 @@
 bin/nnexus
 COPYING
 INSTALL.md
+pod/Cookbook.pod
+pod/Manual.pod
 lib/NNexus.pm
 lib/NNexus/Annotate.pm
 lib/NNexus/Classification.pm
@@ -16,10 +18,8 @@ lib/NNexus/Index/Template.pm
 lib/NNexus/Index/Wikipedia.pm
 lib/NNexus/Job.pm
 lib/NNexus/Morphology.pm
-lib/NNexus/Cookbook.pm
-lib/NNexus/Manual.pm
 lib/NNexus/resources/database/schema.sqlite
-lib/NNexus/resources/database/snapshot-5-2013.sqlite
+lib/NNexus/resources/database/snapshot-1-2014.sqlite
 lib/NNexus/resources/README.txt
 lib/NNexus/StopWordList.pm
 LICENSE
@@ -47,4 +47,5 @@ t/pages/pm_ham.html
 t/pages/pm_simple_method.html
 t/pages/QuadraticInvariant.html
 t/pages/utf8.html
-META.yml                                 Module meta-data (added by MakeMaker)
+META.yml                                 Module YAML meta-data (added by MakeMaker)
+META.json                                Module JSON meta-data (added by MakeMaker)

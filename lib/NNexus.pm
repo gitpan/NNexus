@@ -24,8 +24,9 @@ our @EXPORT = qw(linkentry indexentry);
 our ($INSTALLDIR) = grep(-d $_, map("$_/NNexus", @INC));
 
 use vars qw($VERSION);
-$VERSION  = "2.0alpha3";
+$VERSION  = "2.0";
 
+use Mojo::JSON 'j';
 use NNexus::DB;
 use NNexus::Job;
 our %snapshot_credentials =
@@ -46,7 +47,9 @@ sub linkentry {
   $db = NNexus::DB->new(%snapshot_credentials) unless $db;
   my $job = NNexus::Job->new(function=>'linkentry',body=>$body,db=>$db,%options);
   $job->execute;
-  return $job->result;
+  my $result = $job->result;
+  if ($options{annotation} && ($options{annotation} eq 'json')) {j($result);}
+  return $result;
 }
 
 sub indexentry {
