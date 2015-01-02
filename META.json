@@ -4,7 +4,7 @@
       "Deyan Ginev <d.ginev@jacobs-university.de>"
    ],
    "dynamic_config" : 1,
-   "generated_by" : "ExtUtils::MakeMaker version 6.68, CPAN::Meta::Converter version 2.131560",
+   "generated_by" : "ExtUtils::MakeMaker version 6.66, CPAN::Meta::Converter version 2.142690",
    "license" : [
       "unknown"
    ],
@@ -19,31 +19,13 @@
          "inc"
       ]
    },
-   "prereqs" : {
-      "build" : {
-         "requires" : {
-            "ExtUtils::MakeMaker" : "0"
-         }
-      },
-      "configure" : {
-         "requires" : {
-            "ExtUtils::MakeMaker" : "0"
-         }
-      },
-      "runtime" : {
-         "requires" : {
-            "DBD::SQLite" : "0",
-            "DBI" : "0",
-            "HTML::Parser" : "0",
-            "List::MoreUtils" : "0",
-            "Mojo::DOM" : "0",
-            "Mojo::JSON" : "0",
-            "Mojolicious" : "4.6",
-            "Mojolicious::Lite" : "0",
-            "Text::Unidecode" : "0"
-         }
+   "release_status" : "stable",
+   "resources" : {
+      "repository" : {
+         "type" : "git",
+         "url" : "https://github.com/dginev/nnexus.git",
+         "web" : "https://github.com/dginev/nnexus"
       }
    },
-   "release_status" : "stable",
-   "version" : "2.0"
+   "version" : "v2.0.1"
 }

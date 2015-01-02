@@ -21,8 +21,7 @@ WriteMakefile(
   ABSTRACT => "NNexus autolinker",
   VERSION_FROM => 'lib/NNexus.pm',
   PREREQ_PM => { 
-    'Mojolicious'=>4.6,
-    'Mojolicious::Lite'=>0,
+    'Mojolicious'=>5.0,
     'Mojo::JSON'=>0,
     'Mojo::DOM'=>0,
     'DBI'=>0,
@@ -33,7 +32,16 @@ WriteMakefile(
   },
   EXE_FILES => ['bin/nnexus'],
   macro => $MORE_MACROS,
-);
+  (eval { ExtUtils::MakeMaker->VERSION(6.46) } ? (META_MERGE => {
+    'meta-spec' => { version => 2 },
+      resources => {
+        repository => {
+          type => 'git',
+          url => 'https://github.com/dginev/nnexus.git',
+          web => 'https://github.com/dginev/nnexus',
+        }}})
+  : ())
+  );
 
 #**********************************************************************
 # Overriding ExtUtils::MM methods
@@ -51,9 +59,9 @@ sub MY::postamble {
 
 
 sub compile_snapshot_db {
-  push(@EXCLUSIONS,'blib/lib/NNexus/resources/database/snapshot-1-2014.sqlite');
+  push(@EXCLUSIONS,'blib/lib/NNexus/resources/database/snapshot-6-2014.sqlite');
   $$MORE_MACROS{SNAPSHOT_FILE} = '$(INST_LIBDIR)/NNexus/resources/database/snapshot.db';
-  $$MORE_MACROS{DUMP_FILE} = 'lib/NNexus/resources/database/snapshot-1-2014.sqlite';
+  $$MORE_MACROS{DUMP_FILE} = 'lib/NNexus/resources/database/snapshot-6-2014.sqlite';
   $$MORE_MACROS{DBH} = '$$dbh';
   $$MORE_MACROS{IT} = '$$_';
   $$MORE_MACROS{SQLITE} = 'sqlite3';

@@ -22,11 +22,11 @@ use Exporter;
 our @ISA = qw(Exporter);
 our @EXPORT_OK = qw(serialize_concepts);
 
-use feature 'switch';
 use List::MoreUtils;
 use Data::Dumper;
 $Data::Dumper::Sortkeys =1;
 use NNexus::Concepts qw(links_from_concept);
+use Mojo::JSON;
 
 sub serialize_concepts {
   my (%options) = @_;
@@ -104,14 +104,14 @@ sub serialize_concepts {
     }
   } else {
     # stand-off case:
-    given ($annotation) {
-      when ('json') { return $concepts; }
-      # when ('perl') { return Dumper($concepts); } #TODO: Why is this relevant? Testing?
-      # TODO: Think of Markdown annotations
-      # TODO: Stand-off HTML links
-      # TODO: Embedded JSON and RDFa
-      default { return $concepts; }
-    };
+    if ($annotation eq 'json') {
+     my $json = Mojo::JSON->new;
+     return $json->encode($concepts); }
+    # when ('perl') { return Dumper($concepts); } #TODO: Why is this relevant? Testing?
+    # TODO: Think of Markdown annotations
+    # TODO: Stand-off HTML links
+    # TODO: Embedded JSON and RDFa
+    else { return $concepts; }
   }
 }
 
@@ -119,7 +119,10 @@ our $tooltip_images = {
  Planetmath=>'http://planetmath.org/sites/default/files/fab-favicon.ico',
  Wikipedia=>'http://bits.wikimedia.org/favicon/wikipedia.ico',
  Dlmf=>'http://dlmf.nist.gov/style/DLMF-16.png',
- Mathworld=>'http://mathworld.wolfram.com/favicon_mathworld.png'
+ Mathworld=>'http://mathworld.wolfram.com/favicon_mathworld.png',
+ Mathhub=>'http://kwarc.info/kohlhase/varia/mathHubLogo.png',
+ Encyclopediaofmath=>'http://www.euro-math-soc.eu/sites/all/themes/custom/ems/images/ems_logo.png',
+ Nlab=>'http://nnexus.mathweb.org/nlab_logo.png'
 };
 sub domain_tooltip {
   my ($domain_name) = @_;
